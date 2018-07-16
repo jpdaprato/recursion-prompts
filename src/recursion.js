@@ -25,12 +25,15 @@ var sum = function(array) {
   return copy.pop() + sum(copy);
 };
 
-// Base Case
-// testArray = [1]
-
 // 3. Sum all numbers in an array containing nested arrays.
 // arraySum([1,[2,3],[[4]],5]); // 15
 var arraySum = function(array) {
+  return array.reduce(function(total, elem) {
+  	if (typeof elem === 'number') {
+  	  return total + elem;
+  	}
+  	return total + sum(elem);
+  }, 0);
 };
 
 // 4. Check if a number is even.
