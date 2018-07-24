@@ -150,6 +150,30 @@ const removeSpacesAndCaps = function(string) {
 // modulo(17,5) // 2
 // modulo(22,6) // 4
 var modulo = function(x, y) {
+  if (x < 0 || y < 0) {
+    return negModulo(x, y);
+  }
+  if (y > x) {
+    return x;
+  } else if (x === y) {
+    return NaN;
+  }
+  if (y + y > x) {
+    return x - y;
+  } else if (y + y === x) {
+    return 0;
+  }
+  return modulo(x - y, y);
+};
+
+const negModulo = function(x, y) {
+  if (x < 0) {
+    x = 0 - x;
+  }
+  if (y < 0) {
+    y = 0 - y;
+  }
+  return 0 - modulo(x, y);
 };
 
 // 12. Write a function that multiplies two numbers without using the * operator or
