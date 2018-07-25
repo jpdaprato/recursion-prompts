@@ -152,10 +152,9 @@ const removeSpacesAndCaps = function(string) {
 var modulo = function(x, y) {
   if (x < 0 || y < 0) {
     return negModulo(x, y);
-  }
-  if (y > x) {
+  } else if (y > x) {
     return x;
-  } else if (x === y) {
+  } else if (x === 0 && y === 0) {
     return NaN;
   }
   if (y + y > x) {
