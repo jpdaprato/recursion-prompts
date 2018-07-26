@@ -224,6 +224,9 @@ const multOrDivNegNums = function(x, y, func) {
 // gcd(4,36); // 4
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
+let startingX;
+let firstRun = true;
+
 var gcd = function(x, y) {
   if (x < 0 || y < 0) {
     return null;
@@ -234,7 +237,12 @@ var gcd = function(x, y) {
     x = tempY;
     y = tempX;
   }
-  if (isFactor(x, x) && isFactor(x, y)) {
+  if (firstRun) {
+    startingX = x;
+  }
+  firstRun = false;
+  if (isFactor(x, startingX) && isFactor(x, y)) {
+    firstRun = true;
     return x;
   }
   return gcd(x - 1, y);
