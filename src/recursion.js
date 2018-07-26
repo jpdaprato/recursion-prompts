@@ -181,7 +181,7 @@ var multiply = function(x, y) {
   if (x === 0 || y === 0) {
     return 0;
   } else if (x < 0 || y < 0) {
-    return multiplyNegNums(x, y);
+    return multOrDivNegNums(x, y, multiply);
   }
   if (y === 1) {
     return x;
@@ -189,23 +189,34 @@ var multiply = function(x, y) {
   return x + multiply(x, y - 1);
 };
 
-const multiplyNegNums = function(x, y) {
-  if (x < 0 && y < 0) {
-    x = 0 - x;
-    y = 0 - y;
-    return multiply(x, y);
-  } else if (x < 0) {
-    x = 0 - x;
-    return 0 - multiply(x, y);
-  } else if (y < 0) {
-    y = 0 - y;
-    return 0 - multiply(x, y);
-  }
-};
-
 // 13. Write a function that divides two numbers without using the / operator or
 // Math methods.
 var divide = function(x, y) {
+  if (y === 0) {
+    return NaN;
+  } else if (x === 0 || x < y) {
+    return 0;
+  } else if (x < 0 || y < 0) {
+    return multOrDivNegNums(x, y, divide);
+  }
+  if (y + y > x) {
+    return 1;
+  }
+  return 1 + divide(x - y, y);
+};
+
+const multOrDivNegNums = function(x, y, func) {
+  if (x < 0 && y < 0) {
+    x = 0 - x;
+    y = 0 - y;
+    return func(x, y);
+  } else if (x < 0) {
+    x = 0 - x;
+    return 0 - func(x, y);
+  } else if (y < 0) {
+    y = 0 - y;
+    return 0 - func(x, y);
+  }
 };
 
 // 14. Find the greatest common divisor (gcd) of two positive numbers. The GCD of two
