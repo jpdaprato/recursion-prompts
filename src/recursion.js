@@ -225,6 +225,30 @@ const multOrDivNegNums = function(x, y, func) {
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
 var gcd = function(x, y) {
+  if (x < 0 || y < 0) {
+    return null;
+  } else if (x > y) {
+    let tempX = x;
+    let tempY = y;
+
+    x = tempY;
+    y = tempX;
+  }
+  if (isFactor(x, x) && isFactor(x, y)) {
+    return x;
+  }
+  return gcd(x - 1, y);
+};
+
+const isFactor = function(num1, num2) {
+  let isFactor = false;
+  for (let i = 1; num1 * i <= num2; i++) {
+    if (num1 * i === num2) {
+      isFactor = true;
+      break;
+    }
+  }
+  return isFactor;
 };
 
 // 15. Write a function that compares each character of two strings and returns true if
