@@ -224,40 +224,69 @@ const multOrDivNegNums = function(x, y, func) {
 // gcd(4,36); // 4
 // http://www.cse.wustl.edu/~kjg/cse131/Notes/Recursion/recursion.html
 // https://www.khanacademy.org/computing/computer-science/cryptography/modarithmetic/a/the-euclidean-algorithm
-let startingX;
-let firstRun = true;
 
+// Using Euclidean Algorithm
 var gcd = function(x, y) {
   if (x < 0 || y < 0) {
     return null;
-  } else if (x > y) {
-    let tempX = x;
-    let tempY = y;
-
-    x = tempY;
-    y = tempX;
-  }
-  if (firstRun) {
-    startingX = x;
-  }
-  firstRun = false;
-  if (isFactor(x, startingX) && isFactor(x, y)) {
-    firstRun = true;
+  } else if (x === 0) {
+    return y;
+  } else if (y === 0) {
     return x;
   }
-  return gcd(x - 1, y);
+
+  let greatest;
+  let least;
+
+  if (x > y) {
+    greatest = x;
+    least = y;
+  } else {
+    greatest = y;
+    least = x;
+  }
+
+  let remainder = greatest % least;
+
+  return gcd(least, remainder);
 };
 
-const isFactor = function(num1, num2) {
-  let isFactor = false;
-  for (let i = 1; num1 * i <= num2; i++) {
-    if (num1 * i === num2) {
-      isFactor = true;
-      break;
-    }
-  }
-  return isFactor;
-};
+//Original Solution (before learning about Euclidean algorithm)
+
+// let startingX;
+// let firstRun = true;
+
+// var gcd = function(x, y) {
+//   if (x < 0 || y < 0) {
+//     return null;
+//   } else if (x > y) {
+//     let tempX = x;
+//     let tempY = y;
+
+//     x = tempY;
+//     y = tempX;
+//   }
+//   if (firstRun) {
+//     startingX = x;
+//   }
+//   firstRun = false;
+//   if (isFactor(x, startingX) && isFactor(x, y)) {
+//     firstRun = true;
+//     return x;
+//   }
+//   return gcd(x - 1, y);
+// };
+
+// const isFactor = function(num1, num2) {
+//   let isFactor = false;
+//   for (let i = 1; num1 * i <= num2; i++) {
+//     if (num1 * i === num2) {
+//       isFactor = true;
+//       break;
+//     }
+//   }
+//   return isFactor;
+// };
 
 // 15. Write a function that compares each character of two strings and returns true if
 // both are identical.
