@@ -321,7 +321,7 @@ var createArray = function(str) {
 // 17. Reverse the order of an array
 var reverseArr = function(array) {
   if (array.length === 1) {
-    return [array.pop()];
+    return array;
   }
   return [array.pop(), ...reverseArr(array)];
 };
