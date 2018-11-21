@@ -467,14 +467,6 @@ let fibonacci = (n) => {
   if (n <= 0) {
     return null;
   }
-  let nFib = [];
-  for (let i = 0; i <= n; i++) {
-    let last = nFib[nFib.length - 1];
-    let secondToLast = nFib[nFib.length - 2];
-    let next = last + secondToLast;
-    nFib.push(next);
-  }  
-  return nFib;
 };
 
 // 26. Return the Fibonacci number located at index n of the Fibonacci sequence.
@@ -483,9 +475,14 @@ let fibonacci = (n) => {
 // nthFibo(7); // 13
 // nthFibo(3); // 2
 var nthFibo = function(n) {
-  if (n <= 0) {
+  if (n < 0) {
     return null;
+  } else if (n === 0) {
+    return 0;
+  } else if (n === 1) {
+    return 1;
   }
+  return nthFibo(n - 1) + nthFibo(n - 2);
 };
 
 // 27. Given an array of words, return a new array containing each word capitalized.
